@@ -1,0 +1,39 @@
+<html>
+  <!-- <script src="script.js"></script> -->
+  <head>    
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>    
+    <a href="/index.html">back</a>
+    <script>
+          function showCircle(cx, cy, radius, callback) {
+            return new Promise((resolve)=> {
+              let div = document.createElement('div');            
+              div.style.width = 0;
+              div.style.height = 0;
+              div.style.top = cy+'px';
+              div.style.left = cx+'px';
+              div.style.backgroundColor = 'skyblue';
+              div.className = 'divclass';
+              document.body.append(div);
+
+              setTimeout(() => {
+                div.style.width = radius * 2+'px';
+                div.style.height = radius * 2+'px';
+                div.addEventListener('transitionend', function handler(){
+                  div.removeEventListener('transitionend',handler);
+                  resolve(div);
+                })                
+              });
+            });            
+          }
+          const promise = showCircle(100, 200, 100);
+          promise.then((div)=>{
+            div.style.fontSize =  20+'px';
+            div.style.lineHeight =  200+'px';
+            div.style.textAlign =  'center';
+            div.append('my world')
+          })
+    </script>
+  </body>
+</html>
