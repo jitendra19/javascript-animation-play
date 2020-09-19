@@ -1,0 +1,37 @@
+<html>
+  <head>    
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>    
+    <!-- <a href="/me.html">My other page</a> -->
+    <script>
+          function showCircle(cx, cy, radius, callback) {
+            let div = document.createElement('div');            
+            div.style.width = 0;
+            div.style.height = 0;
+            div.style.top = cy+'px';
+            div.style.left = cx+'px';
+            div.style.backgroundColor = 'pink';
+            div.className = 'divclass';
+            document.body.append(div);
+
+            setTimeout(() => {
+              div.style.width = radius * 2+'px';
+              div.style.height = radius * 2+'px';
+              div.addEventListener('transitionend', function handler(){
+                div.removeEventListener('transitionend',handler);
+                callback(div);
+              })
+              // callback(div);
+            });
+          }
+          showCircle(100, 100, 100, (div)=> {
+            // alert('abc');
+            div.style.fontSize =  20+'px';
+            div.style.lineHeight =  200+'px';
+            div.style.textAlign =  'center';
+            div.append('my world')
+          });
+    </script>
+  </body>
+</html>
